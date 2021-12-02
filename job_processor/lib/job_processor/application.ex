@@ -7,8 +7,7 @@ defmodule JobProcessor.Application do
 
   def start(_type, _args) do
     children = [
-      # Starts a worker by calling: JobProcessor.Worker.start_link(arg)
-      # {JobProcessor.Worker, arg}
+      {DynamicSupervisor, strategy: :one_for_one, name: JobProcessor.JobRunner}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
