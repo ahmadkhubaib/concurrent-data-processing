@@ -6,8 +6,13 @@ defmodule JobProcessor.Application do
   use Application
 
   def start(_type, _args) do
+    job_runner_config = [
+      strategy: :one_for_one,
+      name: JobProcessor.JobRunner,
+      max_seconds: 30_000
+    ]
     children = [
-      {DynamicSupervisor, strategy: :one_for_one, name: JobProcessor.JobRunner}
+      {DynamicSupervisor, job_runner_config}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
