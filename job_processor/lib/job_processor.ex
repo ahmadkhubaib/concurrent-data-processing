@@ -1,18 +1,7 @@
 defmodule JobProcessor do
-  @moduledoc """
-  Documentation for `JobProcessor`.
-  """
+  alias JobProcessor.{JobSupervisor, JobRunner}
 
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> JobProcessor.hello()
-      :world
-
-  """
-  def hello do
-    :world
+  def start_job(args) do
+    DynamicSupervisor.start_child(JobRunner, {JobSupervisor, args})
   end
 end
