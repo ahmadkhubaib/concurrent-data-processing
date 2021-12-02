@@ -1,10 +1,14 @@
 defmodule JobProcessor.Job do
-  use GenServer
+  use GenServer, restart: :transient
   require Logger
 
   alias JobProcessor.Job
 
   defstruct [:work, :id, :max_retries, retries: 0, status: "new"]
+
+  def start_link(args) do
+    GenServer.start_link(__MODULE__, args)
+  end
 
   def init(args) do
     work = Keyword.fetch!(args, :work)
@@ -52,5 +56,11 @@ defmodule JobProcessor.Job do
     else
       new_state
     end
+  end
+
+  defp handle_job_result(msg, state) do
+    IO.inspect(msg, label: "++++++++++++++++++++++++++++++++")
+    IO.inspect(state, label: "--------------------------------")
+    %Job{state | status: "failed"}
   end
 end
