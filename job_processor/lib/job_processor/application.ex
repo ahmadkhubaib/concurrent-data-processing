@@ -12,6 +12,7 @@ defmodule JobProcessor.Application do
       max_seconds: 30_000
     ]
     children = [
+      {Registry, keys: :unique, name: JobProcessor.JobRegistry}
       {DynamicSupervisor, job_runner_config}
     ]
 
