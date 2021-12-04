@@ -1,11 +1,11 @@
-good_job = fn -> Process.sleep(5000)
+good_job = fn -> Process.sleep(20000)
   {:ok, []}
 end
 
-bad_job = fn -> Process.sleep(5000)
+bad_job = fn -> Process.sleep(20000)
   :error
 end
 
-unknown_job = fn -> Process.sleep(5000)
+unknown_job = fn -> Process.sleep(20000)
   raise "Boom!"
 end
