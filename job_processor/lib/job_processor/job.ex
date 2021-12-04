@@ -71,10 +71,4 @@ defmodule JobProcessor.Job do
       new_state
     end
   end
-
-  defp handle_job_result(msg, state) do
-    IO.inspect(msg, label: "++++++++++++++++++++++++++++++++")
-    IO.inspect(state, label: "--------------------------------")
-    %Job{state | status: "failed"}
-  end
 end
