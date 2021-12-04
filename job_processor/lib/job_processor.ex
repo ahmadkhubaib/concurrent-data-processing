@@ -9,6 +9,10 @@ defmodule JobProcessor do
   end
 
   def start_job(args) do
-    DynamicSupervisor.start_child(JobRunner, {JobSupervisor, args})
+    if length(running_imports()) >=5 do
+      {:error, :import_quota_reached}
+    else
+      DynamicSupervisor.start_child(JobRunner, {JobSupervisor, args})
+    end
   end
 end
