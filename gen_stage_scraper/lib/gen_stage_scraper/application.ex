@@ -7,8 +7,8 @@ defmodule GenStageScraper.Application do
 
   def start(_type, _args) do
     children = [
-      # Starts a worker by calling: GenStageScraper.Worker.start_link(arg)
-      # {GenStageScraper.Worker, arg}
+      PageProducer,
+      PageConsumer
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
