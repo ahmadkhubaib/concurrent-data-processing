@@ -8,7 +8,7 @@ defmodule GenStageScraper.Application do
   def start(_type, _args) do
     children = [
       PageProducer,
-      PageConsumer
+      PageConsumerSupervisor
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
